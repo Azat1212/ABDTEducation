@@ -24,7 +24,7 @@ namespace ImageService.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Image> Get()
+        public IEnumerable<Image> GetAll()
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new Image
