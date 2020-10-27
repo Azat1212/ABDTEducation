@@ -13,7 +13,7 @@ namespace ImageService.Controllers
     {
         private static readonly string[] Extension = new[]
         {
-            "JPEG", "GIF", "PNG", "SVG", "ROW"
+            "JPEG", "GIF", "PNG", "SVG", "RAW"
         };
 
         private readonly ILogger<ImageController> _logger;
