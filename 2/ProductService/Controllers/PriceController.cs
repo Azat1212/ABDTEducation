@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProductService.Models;
 
 namespace PriceService.Controllers
 {
@@ -11,11 +12,7 @@ namespace PriceService.Controllers
     [Route("[controller]")]
     public class PriceController : ControllerBase
     {
-        private static readonly string[] Types = new[]
-        {
-            "Purchasing", "Selling", "Recommended", "Promotional"
-        };
-
+        
         private readonly ILogger<PriceController> _logger;
 
         public PriceController(ILogger<PriceController> logger)
@@ -26,13 +23,8 @@ namespace PriceService.Controllers
         [HttpGet]
         public IEnumerable<Price> GetAll()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, Types.Length ).Select(index => new Price
-            {
-                Type = Types[index - 1],
-                Value = rng.Next(40, 55)
-            })
-            .ToArray();
+            var prices = new ProductService.Services.PriceService();
+            return prices.GetAll();
         }
     }
 }
