@@ -23,14 +23,6 @@ namespace ProductService.Services
 
         public IEnumerable<Product> GetAll()
         {
-            //var result = new List<Product>();
-            //result.Add(new Product
-            //{
-            //    Images = _imageService.GetAll(),
-            //    Prices = _priceService.GetAll()
-
-
-            //});
             return Enumerable.Range(1, Types.Length).Select(index => new Product
             {
                 Type = Types[index-1],
@@ -39,7 +31,6 @@ namespace ProductService.Services
 
             })
                 .ToArray();
-            //return result;
         }
     }
 }

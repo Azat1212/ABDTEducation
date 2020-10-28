@@ -22,9 +22,9 @@ namespace ProductService.Controllers
         [HttpGet]
         public IEnumerable<Product> GetAll()
         {
-            var products = new ProductService.Services.ProductService(
-                new ProductService.Services.ImageService(), 
-                new ProductService.Services.PriceService());
+            var products = new Services.ProductService(
+                new Services.ImageService(), 
+                new Services.PriceService());
 
             return products.GetAll();
 
