@@ -1,0 +1,4 @@
+namespace ImageService.Entities
+{
+    public 
+}

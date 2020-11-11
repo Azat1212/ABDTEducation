@@ -4,10 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ProductService.Models;
-using ProductService;
 
-namespace ImageService.Controllers
+namespace ImageService
 {
     [ApiController]
     [Route("[controller]")]
@@ -24,7 +22,7 @@ namespace ImageService.Controllers
         [HttpGet]
         public IEnumerable<Image> GetAll()
         {
-            var images = new ProductService.Services.ImageService();
+            var images = new ImageService();
             return images.GetAll();
         }
     }
