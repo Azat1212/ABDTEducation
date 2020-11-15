@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ProductService.Models;
 
 namespace PriceService.Controllers
 {
@@ -23,7 +19,7 @@ namespace PriceService.Controllers
         [HttpGet]
         public IEnumerable<Price> GetAll()
         {
-            var prices = new ProductService.Services.PriceService();
+            var prices = new global::PriceService.PriceService();
             return prices.GetAll();
         }
     }

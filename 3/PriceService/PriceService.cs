@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using ProductService.Interfaces;
-using ProductService.Models;
 
-namespace ProductService.Services
+namespace PriceService
 {
     public class PriceService : IPrice
     {

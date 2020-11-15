@@ -2,6 +2,7 @@ using System.Net.Http;
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -36,6 +37,9 @@ namespace ProductService
 
             });
 
+            //services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options =>
+                //options.UseNpgsql());
+
             var refitSettings = new RefitSettings
             {
                 ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
@@ -48,12 +52,12 @@ namespace ProductService
 
             services.TryAddTransient<IImageClient>(_ => RestService.For<IImageClient>(new HttpClient()
             {
-                BaseAddress = new Uri("https://localhost:5005")
+                BaseAddress = new Uri("https://localhost:44367")
             }, refitSettings));
 
             services.TryAddTransient<IPriceClient>(_ => RestService.For<IPriceClient>(new HttpClient()
             {
-                BaseAddress = new Uri("https://localhost:5003")
+                BaseAddress = new Uri("https://localhost:44350")
             }, refitSettings));
 
             services.AddSwaggerGenNewtonsoftSupport();
