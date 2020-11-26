@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.Extensions.Options;
 
 namespace Repository
@@ -42,12 +43,15 @@ namespace Repository
 
         public virtual async Task<IEnumerable<T>> GetAll()
         {
-            throw new NotImplementedException();
+            await using var db = await GetSqlConnection();
+            return await db.QueryAsync<T>($"SELECT * FROM [{typeof(T).Name}] WHERE [IsDeleted] = 0");
         }
 
-        public Task<T> GetById(Guid id)
+        public virtual async Task<T> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            await using var db = await GetSqlConnection();
+            return await db.QueryFirstOrDefaultAsync<T>(
+                $"SELECT * FROM [{typeof(T).Name}] WHERE [Id] = @Id AND [IsDeleted] = 0", new { id });
         }
 
         public Task<bool> Restore(Guid id)

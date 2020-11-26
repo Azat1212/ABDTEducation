@@ -7,12 +7,8 @@ namespace ImageService
 {
     public class Image
     {
-        public DateTime Date { get; set; }
-
-        public string Extension { get; set; }
-
-        public Tuple<int, int> Resolution { get; set; }
-
-        public int Size { get; set; }
+        public Guid Id => Guid.NewGuid();
+        public Guid ProductId => Guid.NewGuid();
+        public string Url => $"https://images/{new Random().Next()}.jpg";
     }
 }
