@@ -1,4 +1,4 @@
-﻿namespace PriceService
+﻿namespace PriceService.Models
 {
     public class Price
     {

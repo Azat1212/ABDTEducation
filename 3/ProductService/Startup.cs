@@ -37,8 +37,8 @@ namespace ProductService
 
             });
 
-            //services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options =>
-                //options.UseNpgsql());
+            services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("Product")));
 
             var refitSettings = new RefitSettings
             {
