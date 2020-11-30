@@ -1,8 +1,13 @@
-﻿namespace PriceService.Models
+﻿using System;
+
+namespace PriceService.Models
 {
     public class Price
     {
-        public string Type { get; set; }
-        public double Value { get; set; }
+        public Guid ProductId { get; set; }
+        public double Retail { get; set; }
+        public double Cost { get; set; }
+        public double Current { get; set; }
+        public bool IsLast { get; set; }
     }
 }

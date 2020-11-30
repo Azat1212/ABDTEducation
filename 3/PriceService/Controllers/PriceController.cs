@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,5 +31,33 @@ namespace PriceService.Controllers
             var priceDbModels = _priceRepository.GetAll();
             return _mapper.Map<IEnumerable<Price>>(priceDbModels);
         }
+        [HttpGet("{productId}")]
+        public IEnumerable<Price> GetByProductId(Guid productId)
+        {
+            var priceDbModels = _priceRepository.GetByProductId(productId);
+            return _mapper.Map<IEnumerable<Price>>(priceDbModels);
+        }
+        
+        [HttpPost]
+        public Task Create(Guid productId, double Retail, double Cost, double Current)
+        {
+            var entity = new PriceDbModel(productId, Retail, Cost, Current);
+            return _priceRepository.Create(entity);
+        }
+
+        [HttpPut]
+        public Task Update(Guid productId, double Current)
+        {
+            return _priceRepository.UpdateByProductId(productId, Current);
+        }
+
+        [HttpDelete]
+        public Task Delete(Guid productId)
+        {
+            return _priceRepository.DeleteByProductId(productId);
+        }
+
+        
+
     }
 }
