@@ -13,7 +13,7 @@ namespace ImageService
         public Guid CreatedBy;
         public DateTime CreatedDate;
         public Guid LastSavedBy;
-        public DateTime LastSavedDate => DateTime.Now;
+        public DateTime LastSavedDate => DateTime.UtcNow;
         public bool IsDeleted => false;
     }
 }

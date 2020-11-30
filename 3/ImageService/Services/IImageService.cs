@@ -12,8 +12,8 @@ namespace ImageService.Services
         Task<IEnumerable<ImageEntity>> GetByProductId(Guid productId);
         Task<ImageEntity> Get(Guid id);
 
-        Task SaveImages(Guid productId, IEnumerable<Image> images);
-        Task SaveImage(Guid productId, Image image);
+        Task SaveImages(Guid productId, IEnumerable<Uri> images);
+        Task SaveImage(Guid productId, Uri uri);
 
         Task UpdateImages(Guid productId, IEnumerable<Image> images);
         Task UpdateImage(Guid productId, Image image);

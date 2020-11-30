@@ -42,17 +42,17 @@ namespace ImageService
         }
 
         [HttpPost]
-        public async Task CreateImages(Guid productId, IEnumerable<Image> images)
+        public async Task CreateImages(Guid productId, IEnumerable<Uri> images)
         {
-            var imagesEntity = _mapper.Map<IEnumerable<Image>>(images);
-            await _imageService.SaveImages(productId, imagesEntity);
+            //var imagesEntity = _mapper.Map<IEnumerable<Image>>(images);
+            await _imageService.SaveImages(productId, images);
         }
 
-        [HttpPost("{id}")]
-        public async Task CreateImage(Guid productId, Image image)
+        [HttpPost("{productId}")]
+        public async Task CreateImage(Guid productId, Uri uri)
         {
-            var imageEntity = _mapper.Map<Image>(image);
-            await _imageService.SaveImage(productId, imageEntity);
+            //var imageEntity = _mapper.Map<Image>(uri);
+            await _imageService.SaveImage(productId, uri);
         }
 
         [HttpPut]

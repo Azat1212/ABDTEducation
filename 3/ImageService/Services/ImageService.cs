@@ -59,17 +59,28 @@ namespace ImageService.Services
             return image;
         }
 
-        public async Task SaveImages(Guid productId, IEnumerable<Image> images)
+        public async Task SaveImages(Guid productId, IEnumerable<Uri> uris)
         {
-            foreach (var image in images)
+            foreach (var image in uris)
             {
                await SaveImage(productId, image);
             }
         }
 
-        public async Task SaveImage(Guid productId, Image image)
+        public async Task SaveImage(Guid productId, Uri uri)
         {
-           
+            var productImage = new ImageEntity();
+
+            productImage.Url = uri.ToString();
+            productImage.Id = Guid.NewGuid();
+            productImage.ProductId = productId;
+            productImage.CreatedBy = Guid.NewGuid();
+            productImage.LastSavedBy = Guid.NewGuid();
+            productImage.CreatedDate = DateTime.UtcNow;
+            productImage.LastSavedDate = DateTime.UtcNow;
+
+            await _imageContext.Images.AddAsync(productImage);
+            await _imageContext.SaveChangesAsync();
         }
 
         public async Task SaveImage(Guid productId, IFormFile file)
