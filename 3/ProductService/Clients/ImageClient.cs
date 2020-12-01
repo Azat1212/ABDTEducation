@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using Refit;
 using System.Collections.Generic;
@@ -10,5 +11,8 @@ namespace ProductService.Clients
     {
         [Get("/image")]
         Task<IEnumerable<Image>> GetAll();
+
+        [Get("/image/{id}")]
+        Task<IEnumerable<Image>> GetByProductId(Guid productId);
     }
 }

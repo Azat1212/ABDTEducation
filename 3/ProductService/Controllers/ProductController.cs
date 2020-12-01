@@ -42,9 +42,9 @@ namespace ProductService.Controllers
         }
         
         [HttpPut]
-        public async Task Update(Guid productId)
+        public async Task Update(Guid productId, string name, string description)
         {
-            await _productService.Update(productId);
+            await _productService.Update(productId, name, description);
         }
         
         [HttpDelete]

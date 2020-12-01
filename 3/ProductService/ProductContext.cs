@@ -7,7 +7,7 @@ namespace ProductService
     {
         public DbSet<ProductDbModel> Product { get; set; }
 
-        public ProductContext(DbContextOptions options) : base()
+        public ProductContext(DbContextOptions<ProductContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

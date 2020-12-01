@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ using ProductService.Clients;
 using Refit;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-
+using ProductService.Interfaces;
 
 
 namespace ProductService
@@ -28,7 +29,7 @@ namespace ProductService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           // services.AddServiceClients(Configuration);
+            //services.AddServiceClients(Configuration);
 
             services.AddMvc().AddNewtonsoftJson();
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -39,11 +40,16 @@ namespace ProductService
 
             });
 
+            //services.AddDbContext<ProductContext>(options =>
+            //    options.UseNpgsql(Configuration.GetConnectionString("Product")));
+
             services.AddDbContext<ProductContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("Product")));
+                options.UseNpgsql("Host=localhost;Port=5432;Database=Product;Username=postgres;Password=12345678"));
 
             //services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options =>
             //    options.UseNpgsql(Configuration.GetConnectionString("Product")));
+
+            services.AddAutoMapper(typeof(Startup));
 
             var refitSettings = new RefitSettings
             {
@@ -68,6 +74,7 @@ namespace ProductService
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddSwaggerGen();
             services.AddControllers();
+            services.AddTransient<IProductService, Services.ProductService>();
         }
 
         
