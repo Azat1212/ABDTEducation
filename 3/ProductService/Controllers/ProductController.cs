@@ -5,41 +5,52 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProductService.Clients;
+using ProductService.Interfaces;
 using ProductService.Models;
 
 namespace ProductService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProductController : ControllerBase 
+    public class ProductController : ControllerBase
     {
+        private readonly IProductService _productService;
         private readonly ILogger<ProductController> _logger;
-        private readonly IImageClient _imageClient;
-        private readonly IPriceClient _priceClient;
 
-        public ProductController(ILogger<ProductController> logger, IImageClient imageClient, IPriceClient priceClient)
+        public ProductController(IProductService productService, ILogger<ProductController> logger)
         {
+            _productService = productService;
             _logger = logger;
-            _imageClient = imageClient;
-            _priceClient = priceClient;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Product>> GetAll()
         {
-            var rnd = new Random();
-            var images = await _imageClient.GetAll();
-            var prices = await _priceClient.GetAll();
+           return await _productService.GetAll();
+        }
 
-            return Enumerable.Range(1, 5).Select(index => new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = $"Product{new Random().Next()}",
-                Description = "Description of product",
-                Images = images,
-                Prices = prices
-            }).ToArray();
+        [HttpGet("{productId}")]
+        public async Task<Product> GetByProductId(Guid productId)
+        {
+            return await _productService.GetByProductId(productId);
+        }
 
+        [HttpPost]
+        public async Task Create(string name, string description)
+        {
+            await _productService.Create(name, description);
+        }
+        
+        [HttpPut]
+        public async Task Update(Guid productId)
+        {
+            await _productService.Update(productId);
+        }
+        
+        [HttpDelete]
+        public async Task Delete(Guid productId)
+        {
+            await _productService.Delete(productId);
         }
     }
 }

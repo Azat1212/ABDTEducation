@@ -28,6 +28,8 @@ namespace ProductService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           // services.AddServiceClients(Configuration);
+
             services.AddMvc().AddNewtonsoftJson();
             services.AddControllers().AddNewtonsoftJson(options =>
             {
@@ -37,8 +39,11 @@ namespace ProductService
 
             });
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options =>
+            services.AddDbContext<ProductContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("Product")));
+
+            //services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options =>
+            //    options.UseNpgsql(Configuration.GetConnectionString("Product")));
 
             var refitSettings = new RefitSettings
             {
