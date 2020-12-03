@@ -35,19 +35,14 @@ namespace ProductService
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
 
             });
 
-            //services.AddDbContext<ProductContext>(options =>
-            //    options.UseNpgsql(Configuration.GetConnectionString("Product")));
-
             services.AddDbContext<ProductContext>(options =>
-                options.UseNpgsql("Host=localhost;Port=5432;Database=Product;Username=postgres;Password=12345678"));
-
-            //services.AddEntityFrameworkNpgsql().AddDbContext<ProductContext>(options =>
-            //    options.UseNpgsql(Configuration.GetConnectionString("Product")));
+                options.UseNpgsql(Configuration.GetConnectionString("Product")));
 
             services.AddAutoMapper(typeof(Startup));
 

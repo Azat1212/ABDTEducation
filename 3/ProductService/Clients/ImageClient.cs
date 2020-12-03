@@ -12,7 +12,7 @@ namespace ProductService.Clients
         [Get("/image")]
         Task<IEnumerable<Image>> GetAll();
 
-        [Get("/image/{id}")]
+        [Get("/image/{productId}")]
         Task<IEnumerable<Image>> GetByProductId(Guid productId);
     }
 }

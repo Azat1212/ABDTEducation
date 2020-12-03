@@ -12,7 +12,7 @@ namespace ProductService.Clients
         [Get("/price")]
         Task<IEnumerable<Price>> GetAll();
 
-        [Get("/price/{id}")]
+        [Get("/price/{productId}")]
         Task<IEnumerable<Price>> GetByProductId(Guid productId);
     }
 }

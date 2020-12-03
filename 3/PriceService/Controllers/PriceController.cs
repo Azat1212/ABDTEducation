@@ -31,6 +31,7 @@ namespace PriceService.Controllers
             var priceDbModels = _priceRepository.GetAll();
             return _mapper.Map<IEnumerable<Price>>(priceDbModels);
         }
+
         [HttpGet("{productId}")]
         public IEnumerable<Price> GetByProductId(Guid productId)
         {
