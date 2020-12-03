@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ImageService.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ImageService
 {
@@ -22,7 +23,7 @@ namespace ImageService
             _imageService = imageService;
             _logger = logger;
         }
-
+        
         [HttpGet] public async Task<IEnumerable<Image>> GetAll()
         {
             var imageEntities = await _imageService.GetAll();
@@ -41,6 +42,7 @@ namespace ImageService
             return _mapper.Map<Image>(imageEntity);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task CreateImages(Guid productId, IEnumerable<Uri> images)
         {
@@ -48,6 +50,7 @@ namespace ImageService
             await _imageService.SaveImages(productId, images);
         }
 
+        [Authorize]
         [HttpPost("{productId}")]
         public async Task CreateImage(Guid productId, Uri uri)
         {
@@ -55,6 +58,7 @@ namespace ImageService
             await _imageService.SaveImage(productId, uri);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task UpdateImages(Guid productId, IEnumerable<Image> images)
         {
@@ -62,6 +66,7 @@ namespace ImageService
             await _imageService.UpdateImages(productId, imagesEntity);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task UpdateImage(Guid productId, Image image)
         {
@@ -69,12 +74,14 @@ namespace ImageService
             await _imageService.UpdateImage(productId, imageEntity);
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task DeleteImages(Guid productId)
         {
             await _imageService.DeleteImages(productId);
         }
-        
+
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task DeleteImage(Guid guid)
         {
