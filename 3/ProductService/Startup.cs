@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System;
+using AuthenticationBase;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace ProductService
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddServiceClients(Configuration);
+            services.AddAppAuthentication(Configuration);
 
             services.AddMvc().AddNewtonsoftJson();
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -94,6 +96,7 @@ namespace ProductService
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

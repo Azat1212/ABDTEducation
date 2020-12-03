@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProductService.Clients;
@@ -35,18 +36,21 @@ namespace ProductService.Controllers
             return await _productService.GetByProductId(productId);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task Create(string name, string description)
         {
             await _productService.Create(name, description);
         }
-        
+
+        [Authorize]
         [HttpPut]
         public async Task Update(Guid productId, string name, string description)
         {
             await _productService.Update(productId, name, description);
         }
-        
+
+        [Authorize]
         [HttpDelete]
         public async Task Delete(Guid productId)
         {

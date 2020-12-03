@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PriceService.Models;
@@ -38,7 +39,8 @@ namespace PriceService.Controllers
             var priceDbModels = _priceRepository.GetByProductId(productId);
             return _mapper.Map<IEnumerable<Price>>(priceDbModels);
         }
-        
+
+        [Authorize]
         [HttpPost]
         public Task Create(Guid productId, double Retail, double Cost, double Current)
         {
@@ -46,12 +48,14 @@ namespace PriceService.Controllers
             return _priceRepository.Create(entity);
         }
 
+        [Authorize]
         [HttpPut]
         public Task Update(Guid productId, double Current)
         {
             return _priceRepository.UpdateByProductId(productId, Current);
         }
 
+        [Authorize]
         [HttpDelete]
         public Task Delete(Guid productId)
         {

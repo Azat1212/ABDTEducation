@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductService", "ProductSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "..\Repository\Repository.csproj", "{87A43566-4089-4A00-AD37-079F77C048EB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationBase", "..\AuthenticationBase\AuthenticationBase.csproj", "{EA2F6A34-E9B9-40E9-A064-9496BE47E410}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{87A43566-4089-4A00-AD37-079F77C048EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87A43566-4089-4A00-AD37-079F77C048EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87A43566-4089-4A00-AD37-079F77C048EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA2F6A34-E9B9-40E9-A064-9496BE47E410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA2F6A34-E9B9-40E9-A064-9496BE47E410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA2F6A34-E9B9-40E9-A064-9496BE47E410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA2F6A34-E9B9-40E9-A064-9496BE47E410}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

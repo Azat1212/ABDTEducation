@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PriceService", "PriceServic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "..\Repository\Repository.csproj", "{DF3A9C59-F6D3-4B0A-BD66-E2629CD2BB4A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationBase", "..\AuthenticationBase\AuthenticationBase.csproj", "{311BFD8F-3D96-4333-8375-A3F85E9E8738}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DF3A9C59-F6D3-4B0A-BD66-E2629CD2BB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF3A9C59-F6D3-4B0A-BD66-E2629CD2BB4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF3A9C59-F6D3-4B0A-BD66-E2629CD2BB4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311BFD8F-3D96-4333-8375-A3F85E9E8738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311BFD8F-3D96-4333-8375-A3F85E9E8738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311BFD8F-3D96-4333-8375-A3F85E9E8738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311BFD8F-3D96-4333-8375-A3F85E9E8738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
