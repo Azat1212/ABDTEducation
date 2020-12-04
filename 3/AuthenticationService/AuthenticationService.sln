@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationService", "AuthenticationService\AuthenticationService.csproj", "{3CDBA99C-43BE-44C5-B6FD-B2ED7A8C478C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationService", "AuthenticationService.csproj", "{3CDBA99C-43BE-44C5-B6FD-B2ED7A8C478C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationBase", "..\AuthenticationBase\AuthenticationBase.csproj", "{EEEBDAB7-8196-44E3-A28B-CE12785A3A26}"
 EndProject
