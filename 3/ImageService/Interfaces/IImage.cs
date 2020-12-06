@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using ImageService.Models;
 
-namespace ImageService
+namespace ImageService.Interfaces
 {
     public interface IImage
     {

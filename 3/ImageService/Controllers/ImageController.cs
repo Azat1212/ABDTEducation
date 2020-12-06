@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using ImageService.Interfaces;
+using ImageService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ImageService.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace ImageService
 {
@@ -42,21 +45,27 @@ namespace ImageService
             return _mapper.Map<Image>(imageEntity);
         }
 
-        [Authorize]
+        //[Authorize] 
+        //[HttpPost]
+        //public async Task CreateImages(Guid productId, IEnumerable<Uri> images)
+        //{
+        //    //var imagesEntity = _mapper.Map<IEnumerable<Image>>(images);
+        //    await _imageService.SaveImages(productId, images);
+        //}        
+        
         [HttpPost]
-        public async Task CreateImages(Guid productId, IEnumerable<Uri> images)
+        public async Task CreateImages(Guid productId, IFormFile file)
         {
-            //var imagesEntity = _mapper.Map<IEnumerable<Image>>(images);
-            await _imageService.SaveImages(productId, images);
+            await _imageService.SaveImage(productId, file);
         }
 
-        [Authorize]
-        [HttpPost("{productId}")]
-        public async Task CreateImage(Guid productId, Uri uri)
-        {
-            //var imageEntity = _mapper.Map<Image>(uri);
-            await _imageService.SaveImage(productId, uri);
-        }
+        //[Authorize]
+        //[HttpPost("{productId}")]
+        //public async Task CreateImage(Guid productId, Uri uri)
+        //{
+        //    //var imageEntity = _mapper.Map<Image>(uri);
+        //    await _imageService.SaveImage(productId, uri);
+        //}
 
         [Authorize]
         [HttpPut]

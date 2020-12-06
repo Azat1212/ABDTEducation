@@ -1,5 +1,6 @@
+using System;
+using System.Net.Http;
 using AutoMapper;
-using ImageService.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,10 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using AuthenticationBase;
+using ImageService.Interfaces;
+using ImageService.Models;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Refit;
 
 namespace ImageService
 {
@@ -36,8 +41,27 @@ namespace ImageService
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddSwaggerGen();
 
+            var yandexConfig = Configuration.GetSection("YandexDisk");
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IImageService, Services.ImageService>();
+            services.AddTransient<IYandexDiskService, Services.YandexDiskService>();
+            services.Configure<YandexDiskConfig>(yandexConfig);
+
+            var refitSettings = new RefitSettings()
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Ignore,
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                })
+            };
+
+            services.TryAddTransient(_ => RestService.For<IPoligonClient>(new HttpClient()
+            {
+                //BaseAddress = new Uri(yandexConfig.Value)
+                BaseAddress = new Uri("https://cloud-api.yandex.net")
+            }, refitSettings));
 
             services.AddControllers();
             var connectionString = Configuration.GetConnectionString("Image");

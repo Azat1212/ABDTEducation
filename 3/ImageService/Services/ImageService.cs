@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ImageService.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Web.Http;
+using ImageService.Interfaces;
+using ImageService.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 
@@ -14,11 +16,12 @@ namespace ImageService.Services
     public class ImageService : IImageService
     {
         private readonly ImageContext _imageContext;
-        private readonly YandexDiskService _yandexDiskService;
+        private readonly IYandexDiskService _yandexDiskService;
 
-        public ImageService(ImageContext imageContext)
+        public ImageService(ImageContext imageContext, IYandexDiskService yandexDiskService)
         {
             _imageContext = imageContext;
+            _yandexDiskService = yandexDiskService;
         }
 
         public async Task<IEnumerable<ImageEntity>> GetAll()
@@ -89,7 +92,7 @@ namespace ImageService.Services
 
             var productImage = new ImageEntity();
 
-            productImage.Url = uploadedLink;
+            productImage.Url = uploadedLink.Result;
             productImage.Id = Guid.NewGuid();
             productImage.ProductId = productId;
             productImage.CreatedBy = Guid.NewGuid();

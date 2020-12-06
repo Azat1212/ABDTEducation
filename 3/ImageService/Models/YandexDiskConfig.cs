@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net.Http.Headers;
 using System.Security.Policy;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace ImageService
+namespace ImageService.Models
 {
     public class YandexDiskConfig
     {
@@ -15,5 +13,6 @@ namespace ImageService
         public string AccessScheme { get; set; }
 
         public string BasePath { get; set; }
+
     }
 }
