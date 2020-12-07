@@ -4,7 +4,16 @@ namespace ImageService.Entities
 {
     public class ImageEntity
     {
-        public Guid Id { get; set; }
+        public ImageEntity(Guid productId, string url)
+        {
+            ProductId = productId;
+            Url = url;
+            CreatedBy = Guid.NewGuid();
+            CreatedDate = DateTime.UtcNow;
+            LastSavedBy = Guid.NewGuid();
+            LastSavedDate = DateTime.UtcNow;
+        }
+        public Guid Id { get; set; } 
         public Guid ProductId { get; set; }
         public string Url { get; set; }
         public Guid CreatedBy { get; set; }

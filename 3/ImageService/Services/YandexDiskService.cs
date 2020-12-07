@@ -27,7 +27,7 @@ namespace ImageService.Services
             IPoligonClient yandexPoligonClient,
             ILogger<YandexDiskService> logger)
         {
-            _logger = logger;
+            _logger = logger; 
             _yaConfig = yandexDiskConfig.Value;
             _yaClient = yandexPoligonClient;
         }
@@ -58,6 +58,14 @@ namespace ImageService.Services
             return BitConverter.ToString(hashBytes) + fileExtension;
         }
 
+        private byte[] fileToBytes(IFormFile file)
+        {
+            var ms = new MemoryStream();
+
+            file.CopyTo(ms);
+            return ms.ToArray();
+        }
+
         private async Task UploadToYaDisk(string filePath, IFormFile file)
         {
             try
@@ -69,14 +77,7 @@ namespace ImageService.Services
 
                 request.AddHeader("Authorization", _yaConfig.AccessToken);
 
-                var ms = new MemoryStream();
-
-                file.CopyTo(ms);
-                var fileBytes = ms.ToArray();
-                string s = Convert.ToBase64String(fileBytes);
-
-
-                request.AddFile("file", fileBytes /*File.ReadAllBytes(file)*/, "");
+                request.AddFile("file", fileToBytes(file) , "");
                 client.Execute(request);
             }
             catch (Exception e)

@@ -6,7 +6,7 @@ namespace ImageService.Models
 {
     public class YandexDiskConfig
     {
-        public Url BaseUrl { get; set; }
+        public string BaseUrl { get; set; }
 
         public string AccessToken { get; set; }
 

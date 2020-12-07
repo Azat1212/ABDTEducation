@@ -9,8 +9,5 @@ namespace ImageService.Interfaces
     public interface IYandexDiskService
     {
         public Task<string> UploadFile(IFormFile file);
-
-        public string GetFileName(IFormFile file);
-
     }
 }

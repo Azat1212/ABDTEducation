@@ -41,11 +41,14 @@ namespace ImageService
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddSwaggerGen();
 
-            var yandexConfig = Configuration.GetSection("YandexDisk");
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IImageService, Services.ImageService>();
             services.AddTransient<IYandexDiskService, Services.YandexDiskService>();
+
+            var yandexConfig = Configuration.GetSection("YandexDisk");
             services.Configure<YandexDiskConfig>(yandexConfig);
+
+            var yandexConfig2 = yandexConfig.Get<YandexDiskConfig>();
 
             var refitSettings = new RefitSettings()
             {
@@ -59,8 +62,7 @@ namespace ImageService
 
             services.TryAddTransient(_ => RestService.For<IPoligonClient>(new HttpClient()
             {
-                //BaseAddress = new Uri(yandexConfig.Value)
-                BaseAddress = new Uri("https://cloud-api.yandex.net")
+                BaseAddress = new Uri(yandexConfig2.BaseUrl)
             }, refitSettings));
 
             services.AddControllers();
@@ -83,14 +85,12 @@ namespace ImageService
                 c.RoutePrefix = string.Empty;
             });
 
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
 
             app.UseEndpoints(endpoints =>
             {
