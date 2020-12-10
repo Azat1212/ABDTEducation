@@ -72,15 +72,7 @@ namespace ImageService.Services
 
         public async Task SaveImage(Guid productId, Uri uri)
         {
-            var productImage = new ImageEntity();
-
-            productImage.Url = uri.ToString();
-            productImage.Id = Guid.NewGuid();
-            productImage.ProductId = productId;
-            productImage.CreatedBy = Guid.NewGuid();
-            productImage.LastSavedBy = Guid.NewGuid();
-            productImage.CreatedDate = DateTime.UtcNow;
-            productImage.LastSavedDate = DateTime.UtcNow;
+            var productImage = new ImageEntity(productId, uri.ToString());
 
             await _imageContext.Images.AddAsync(productImage);
             await _imageContext.SaveChangesAsync();
@@ -90,15 +82,7 @@ namespace ImageService.Services
         {
             var uploadedLink = _yandexDiskService.UploadFile(file);
 
-            var productImage = new ImageEntity();
-
-            productImage.Url = uploadedLink.Result;
-            productImage.Id = Guid.NewGuid();
-            productImage.ProductId = productId;
-            productImage.CreatedBy = Guid.NewGuid();
-            productImage.LastSavedBy = Guid.NewGuid();
-            productImage.CreatedDate = DateTime.UtcNow;
-            productImage.LastSavedDate = DateTime.UtcNow;
+            var productImage = new ImageEntity(productId, uploadedLink.Result);
 
             await _imageContext.Images.AddAsync(productImage);
             await _imageContext.SaveChangesAsync();

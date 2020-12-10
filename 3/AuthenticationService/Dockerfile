@@ -5,9 +5,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
+
 COPY ./AuthenticationService ./AuthenticationService
 COPY ./AuthenticationBase ./AuthenticationBase
-WORKDIR ./AuthenticationService
+
+WORKDIR /src/AuthenticationService
 RUN dotnet restore "AuthenticationService.csproj"
 RUN dotnet build "AuthenticationService.csproj" -c Release -o /app/build
 
