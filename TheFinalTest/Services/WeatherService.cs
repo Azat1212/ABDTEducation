@@ -19,11 +19,10 @@ namespace TheFinalTest.Services
 
         public async Task<TemperatureResponse> GetTemperatureResponseAsync(string city, MetricEnum metric)
         {
-            var apiResponse = await _client.GetCurrentWeatherAsync(city, _token);
+
+            var apiResponse = await _client.GetCurrentWeatherAsync(city, _token, GetNameMetric(metric));
 
             var temperature = apiResponse.Main.Temp;
-
-            temperature = (metric == MetricEnum.celsius) ? FahrenheitToCelsius(temperature) : temperature;
 
             return new TemperatureResponse
             {
@@ -56,7 +55,7 @@ namespace TheFinalTest.Services
         }
         public async Task<WeatherResponse> GetWeatherResponseAsync(string city, MetricEnum metric)
         {
-            var apiResponse = await _client.GetForecastWeatherAsync(city, _token);
+            var apiResponse = await _client.GetForecastWeatherAsync(city, GetNameMetric(metric), _token);
             
             return new WeatherResponse
             {
@@ -64,19 +63,16 @@ namespace TheFinalTest.Services
                     {
                         City = apiResponse.City.Name,
                         Date = x.Dt_txt,
-                        Temperature = (metric == MetricEnum.celsius) ? FahrenheitToCelsius(x.Main.Temp) : x.Main.Temp,
+                        Temperature = x.Main.Temp,
                         TemperatureMetric = metric.ToString()
                     }
                     ).ToList()
             };
         }
 
-        private double FahrenheitToCelsius(double temperature)
+        private string GetNameMetric(MetricEnum metric)
         {
-                temperature -= 273;
-                return Math.Round(temperature, 2);
+            return (metric == MetricEnum.celsius) ? "metric" : "imperial";
         }
-
-
     }
 }
