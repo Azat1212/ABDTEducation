@@ -11,9 +11,9 @@ namespace TheFinalTest.Models
         East,
         South,
         West,
-        Northeast,
-        Southeast,
-        Southwest,
-        Northwest
+        NorthEast,
+        SouthEast,
+        SouthWest,
+        NorthWest
     }
 }

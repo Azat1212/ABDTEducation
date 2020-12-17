@@ -10,6 +10,6 @@ namespace TheFinalTest.Integration.Clients
         public Task<CurrentWeatherResponse> GetCurrentWeatherAsync(string cityName, string apiKey);
 
         [Get("/data/2.5/forecast?q={cityName}&appid={apiKey}")]
-        public Task<CurrentWeatherResponse> GetForecastWeatherAsync(string cityName, string apiKey);
+        public Task<ManyDatesWeatherResponse> GetForecastWeatherAsync(string cityName, string apiKey);
     }
 }

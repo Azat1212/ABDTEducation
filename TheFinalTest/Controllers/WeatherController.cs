@@ -23,9 +23,21 @@ namespace TheFinalTest.Controllers
         }
 
         [HttpGet("temperature/{cityName}/{metric}")]
-        public Task<TemperatureResponse> Get(string cityName, MetricEnum metric)
+        public Task<TemperatureResponse> GetTemperature(string cityName, MetricEnum metric)
         {
             return _service.GetTemperatureResponseAsync(cityName, metric);
+        }
+
+        [HttpGet("wind/{cityName}")]
+        public Task<WindResponse> GetWind(string cityName)
+        {
+            return _service.GetWindResponseAsync(cityName);
+        }
+
+        [HttpGet("weather/{cityName}/future/{metric}")]
+        public Task<WeatherResponse> GetWeather(string cityName, MetricEnum metric)
+        {
+            return _service.GetWeatherResponseAsync(cityName, metric);
         }
     }
 }

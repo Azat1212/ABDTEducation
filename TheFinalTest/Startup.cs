@@ -18,6 +18,7 @@ using Newtonsoft.Json.Serialization;
 using Refit;
 using TheFinalTest.Integration.Clients;
 using TheFinalTest.Services;
+using TheFinalTest.Utilities;
 
 namespace TheFinalTest
 {
@@ -36,7 +37,6 @@ namespace TheFinalTest
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
 
@@ -55,6 +55,7 @@ namespace TheFinalTest
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TheFinalTest", Version = "v1" });
+                //c.SchemaFilter<EnumSchemaFilter>();
             });
             services.TryAddTransient<IOpenWeatherMapClient>(_ => RestService.For<IOpenWeatherMapClient>(new HttpClient()
             {

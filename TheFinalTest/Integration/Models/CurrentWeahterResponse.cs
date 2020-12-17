@@ -8,7 +8,7 @@ namespace TheFinalTest.Integration.Models
     public class CurrentWeatherResponse
     {
         public Coords Coord { get; set; }
-        public Weather[] Weather { get; set; }
+        //public Weather[] Weather { get; set; }
         public string Base { get; set; }
         public Main Main { get; set; }
         public int Visibility { get; set; }
